@@ -3,20 +3,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Report_model extends CI_Model{
 
-  public function __construct()
-  {
-    parent::__construct();
-    //Codeigniter : Write Less Do More
-  }
+  public $variable;
+    public function __contruct()
+    {
+        parent::__contruct();
+        $this->load->database();
+    }
 
-  function GetBuys()
+  function guardar($post)
   {
-    # code...
-  }
+        $datosVenta = array();
 
-  function GetDetails($id = null)
-  {
-    # code...
+        $datosVenta['Fecha'] = $post['Fecha'];
+        $datosVenta['Hora'] = $post['Hora'];
+        $datosVenta['Total'] = $post['Total'];
+        $datosVenta['_idUsuario'] = $post['_idUsuario'];
+
+
+
+          $this->db->insert('venta',$datosVenta);
+          $ruta = base_url('Inventary');
+          echo "<script>
+              alert('El producto ha sido guardada correctamente.');
+              windows.locaion = '{$ruta}';
+
+          </script>";
+
+    }
+
+    function borrar($get){
+        $this->db->where('idVenta',$get['borrar']);
+        $this->db->delete('venta');
   }
 
 }

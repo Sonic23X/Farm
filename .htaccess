@@ -1,4 +1,6 @@
 RewriteEngine on
+
+RewriteCond $1 !^(index\.php|robots\.txt|sitemap\.xml|css|img)
 RewriteCond $1 !^(index\.php|robots\.txt|sitemap\.xml|resources)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

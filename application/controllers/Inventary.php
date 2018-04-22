@@ -7,6 +7,7 @@ class Inventary extends CI_Controller{
   {
     parent::__construct();
     $this->load->model('User_model');
+    $this->load->model('Inventary_model');
   }
 
   function Index()
@@ -19,6 +20,7 @@ class Inventary extends CI_Controller{
   		$this->load->view('body/head', $data);
 
       $data = array('usuario' => $info->Nick);
+
       $this->load->view('body/nav', $data);
 
       if($info->Tipo == "Administrador")
@@ -38,13 +40,15 @@ class Inventary extends CI_Controller{
 			$this->load->view('body/sidebar', $activos);
 
       //cuerpo
+      $this->load->view('producto.php');
 
 
       //modales
 			$this->load->view('options/buy');
 			$this->load->view('options/about');
 
-  		$this->load->view('body/footer');
+      $this->load->view('body/footer');
+
     }
     else
     {
@@ -52,34 +56,21 @@ class Inventary extends CI_Controller{
     }
   }
 
-  function GetItems()
-  {
+  function guardar()
+	{
+		if($_POST)
+		{
+			$this->Inventary_model->guardar($_POST);
+		}
 
+
+	}
+
+	function borrar(){
+		$this->Inventary_model->borrar($_GET);
+	
   }
 
-  function GetItemsByLetter()
-  {
-    # code...
-  }
 
-  function SearchItem()
-  {
-    # code...
-  }
-
-  function NewItem()
-  {
-    # code...
-  }
-
-  function ChangeItem()
-  {
-    # code...
-  }
-
-  function DeleteItem()
-  {
-    # code...
-  }
 
 }

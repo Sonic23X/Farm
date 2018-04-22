@@ -3,40 +3,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Inventary_model extends CI_Model{
 
-  public function __construct()
-  {
-    parent::__construct();
-    //Codeigniter : Write Less Do More
-  }
+  public $variable;
+    public function __contruct()
+    {
+        parent::__contruct();
+        $this->load->database();
+    }
 
-  function GetItems()
-  {
-    # code...
-  }
+	function guardar($post)
+	{
+        $datosProducto = array();
 
-  function GetItemsByLetter($letra = null)
-  {
-    # code...
-  }
+        $datosProducto['idCategoria'] = $post['idCategoria'];
+        $datosProducto['Nombre'] = $post['Nombre'];
+        $datosProducto['Descripcion'] = $post['Descripcion'];
+        $datosProducto['Precio'] = $post['Precio'];
+        $datosProducto['Stock'] = $post['Stock'];
+        $datosProducto['Imagen'] = $post['Imagen'];
+        $datosProducto['Status'] = $post['Status'];
 
-  function SearchItem($producto = null)
-  {
-    # code...
-  }
 
-  function InsertItem($data = null)
-  {
-    # code...
-  }
+          $this->db->insert('producto',$datosProducto);
+          $ruta = base_url('Inventary');
+          echo "<script>
+              alert('El producto ha sido guardada correctamente.');
+              windows.locaion = '{$ruta}';
 
-  function Delete($id = null)
-  {
-    # code...
-  }
+          </script>";
 
-  function UpdateItem($data = null)
-  {
-    # code...
-  }
+
+
+    }
+
+    function borrar($get){
+        $this->db->where('idProducto',$get['borrar']);
+        $this->db->delete('producto');
+	}
 
 }

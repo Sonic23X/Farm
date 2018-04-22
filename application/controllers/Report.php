@@ -7,6 +7,7 @@ class Report extends CI_Controller{
   {
     parent::__construct();
     $this->load->model('User_model');
+      $this->load->model('Report_model');
   }
 
   function Index()
@@ -38,7 +39,7 @@ class Report extends CI_Controller{
 			$this->load->view('body/sidebar', $activos);
 
       //cuerpo
-
+      $this->load->view('reporte');
 
       //modales
 			$this->load->view('options/buy');
@@ -52,14 +53,19 @@ class Report extends CI_Controller{
     }
   }
 
-  function GetBuys()
-  {
-    # code...
-  }
+  function guardar()
+	{
+		if($_POST)
+		{
+			$this->Report_model->guardar($_POST);
+		}
 
-  function GetDetails()
-  {
-    # code...
+
+	}
+
+	function borrar(){
+		$this->Report_model->borrar($_GET);
+
   }
 
 }

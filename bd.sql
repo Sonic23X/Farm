@@ -1,6 +1,7 @@
 create database farm;
 use farm;
 
+
 CREATE TABLE `categoria` (
   `idCategoria` int(11) NOT NULL,
   `categoria` varchar(30) NOT NULL
